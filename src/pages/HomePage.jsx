@@ -26,7 +26,7 @@ const HomePage = () => {
     <div className="min-h-screen bg-gray-50">
       <div className="sticky top-16 z-40 bg-white border-b border-gray-200 shadow-sm">
         <div className="max-w-6xl mx-auto px-6 py-3 flex justify-between items-center">
-          <span className="text-sm font-medium text-gray-600">Жами сумма</span>
+          <span className="text-sm font-medium text-gray-600">Jami:</span>
           <span className="text-2xl font-bold text-purple-700">
             ${totalPrice.toFixed(2)}
           </span>
