@@ -4,6 +4,7 @@ import Layout from "./components/Layout";
 import HomePage from "./pages/HomePage";
 import { Context } from "./context";
 import CartPage from "./pages/CartPage";
+import NotFound from "./pages/NotFound";
 
 const App = () => {
   const [cart, setCart] = useState([]);
@@ -15,7 +16,8 @@ const App = () => {
           <Route path="/" element={<HomePage />} />
           <Route path="/cart" element={<CartPage/>} />
         </Route>
-      </Routes>
+        <Route path="*" element={<NotFound/>} />
+        </Routes>
     </Context.Provider>
   );
 };
