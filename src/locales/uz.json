@@ -1,0 +1,20 @@
+{
+  "home": {
+    "t1": "Jami summa:"
+  },
+  "cart": {
+    "t1": "Savat bo'sh",
+    "t2": "Savat",
+    "t3": "Jami summa:",
+    "t4": "O'chirish",
+    "t5": "Savatni tozalash"
+  },
+  "nav": {
+    "t1": "Bosh sahifa",
+    "t2": "Savat"
+  },
+  "footer": {
+    "t1": "Bosh sahifa",
+    "t2": "Sayt faqat o'quv maqsadlarida yaratildi. Hech qanday tijorat maqsadi yo'q."
+  }
+}

@@ -1,8 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import useAppContext from "../hooks/useAppContext";
+import { useTranslation } from "react-i18next";
 
 const Nav = () => {
+  const { t, i18n } = useTranslation();
+  useEffect(() => {
+    const currLang = localStorage.getItem("lang");
+    i18n.changeLanguage(currLang);
+  }, [i18n]);
+  const handleChange = (e) => {
+    i18n.changeLanguage(e.target.value);
+    localStorage.setItem("lang", e.target.value);
+  };
   const { cart } = useAppContext();
 
   return (
@@ -27,7 +37,7 @@ const Nav = () => {
                 }`
               }
             >
-              Bosh sahifa
+              {t("nav.t1")}
             </NavLink>
 
             <NavLink
@@ -40,13 +50,30 @@ const Nav = () => {
                 }`
               }
             >
-              Savat
+              {t("nav.t2")}
               {cart.length > 0 && (
                 <span className="absolute -top-2 -right-5 flex items-center justify-center w-6 h-6 bg-purple-500 text-white text-xs font-bold rounded-full animate-pulse">
                   {cart.length}
                 </span>
               )}
             </NavLink>
+            <div className="flex items-center gap-1 bg-white border border-purple-200 rounded-xl px-2 py-1.5">
+              <select
+                value={i18n.language}
+                onChange={handleChange}
+                className="bg-transparent text-sm font-medium text-gray-700 focus:outline-none cursor-pointer appearance-none pr-6 relative"
+              >
+                <option value="uz" className="flex items-center gap-2">
+                  <span className="text-xs">UZ</span> O'zbekcha
+                </option>
+                <option value="ru" className="flex items-center gap-2">
+                  <span className="text-xs">RU</span> Русский
+                </option>
+                <option value="en" className="flex items-center gap-2">
+                  <span className="text-xs">US</span> English
+                </option>
+              </select>
+            </div>
           </div>
         </nav>
       </div>

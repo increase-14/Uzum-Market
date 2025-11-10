@@ -1,0 +1,20 @@
+{
+  "home": {
+    "t1": "Total amount:"
+  },
+  "cart": {
+    "t1": "The cart is empty",
+    "t2": "Basket",
+    "t3": "Total amount:",
+    "t4": "Clear",
+    "t5": "Empty trash"
+  },
+  "nav": {
+    "t1": "Home page",
+    "t2": "Basket"
+  },
+  "footer": {
+    "t1": "Blank page",
+    "t2": "Сайт создан исключительно в образовательных целях. Коммерческих целей не имеет."
+  }
+}
