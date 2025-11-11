@@ -80,7 +80,9 @@ const CartPage = () => {
       <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-3 shadow-md">
         <div className="max-w-md mx-auto">
           <div className="flex justify-between items-center mb-2">
-            <span className="text-sm font-medium text-gray-600">{t("cart.t3")}</span>
+            <span className="text-sm font-medium text-gray-600">
+              {t("cart.t3")}
+            </span>
             <span className="text-xl font-bold text-indigo-600">
               ${total.toFixed(2)}
             </span>
