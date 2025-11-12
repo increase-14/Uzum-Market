@@ -1,43 +1,39 @@
 import { useEffect, useReducer } from "react";
 import axios from "axios";
 
-const initialState = {
-  isLoading: false,
-  data: [],
-  error: "",
-};
+const init = { data: null, isLoading: true, error: null };
 
-function reducer(state, action) {
-  const { type, payload } = action;
-
-  switch (type) {
-    case "DATA":
-      return { ...state, data: payload };
-    case "LOADING":
-      return { ...state, isLoading: !state.isLoading };
-    case "ERROR":
-      return { ...state, error: payload };
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "LOAD":
+      return { ...state, isLoading: true, error: null };
+    case "OK":
+      return { ...state, isLoading: false, data: action.data };
+    case "ERR":
+      return { ...state, isLoading: false, error: action.error };
     default:
       return state;
   }
-}
+};
 
 const useFetch = (url) => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(reducer, init);
 
   useEffect(() => {
-    dispatch({ type: "LOADING" });
-
+    if (!url) return;
+    dispatch({ type: "LOAD" });
     axios
       .get(url)
-      .then((res) => dispatch({ type: "DATA", payload: res.data.products }))
-      .catch((err) =>
-        dispatch({ type: "ERROR", payload: err.message || "Xatolik" })
-      )
-      .finally(() => dispatch({ type: "LOADING" }));
+      .then((res) => {
+        const data = res.data.products ?? res.data;
+        dispatch({ type: "OK", data });
+      })
+      .catch((err) => {
+        dispatch({ type: "ERR", error: err.message });
+      });
   }, [url]);
 
-  return { ...state };
+  return state;
 };
 
 export default useFetch;

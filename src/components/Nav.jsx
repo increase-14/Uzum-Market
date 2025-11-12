@@ -1,16 +1,23 @@
 import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import useAppContext from "../hooks/useAppContext";
 
-const Nav = ({ favorites = [] }) => {
+const Nav = () => {
   const { t, i18n } = useTranslation();
+  const { cart } = useAppContext();
+
+  const totalItems = cart.reduce((sum, item) => sum + (item.count || 0), 0);
+
   useEffect(() => {
-    const currLang = localStorage.getItem("lang");
-    if (currLang) i18n.changeLanguage(currLang);
+    const savedLang = localStorage.getItem("lang");
+    if (savedLang) i18n.changeLanguage(savedLang);
   }, [i18n]);
+
   const handleChange = (e) => {
-    i18n.changeLanguage(e.target.value);
-    localStorage.setItem("lang", e.target.value);
+    const lang = e.target.value;
+    i18n.changeLanguage(lang);
+    localStorage.setItem("lang", lang);
   };
 
   return (
@@ -44,9 +51,10 @@ const Nav = ({ favorites = [] }) => {
               }
             >
               {t("nav.t2")}
-              {favorites.length > 0 && (
-                <span className="absolute -top-2 -right-5 w-6 h-6 bg-purple-500 text-white text-xs rounded-full flex items-center justify-center">
-                  {favorites.length}
+
+              {totalItems > 0 && (
+                <span className="absolute -top-2 -right-5 w-6 h-6 bg-red-500 text-white text-xs font-bold rounded-full flex items-center justify-center shadow">
+                  {totalItems}
                 </span>
               )}
             </NavLink>
